@@ -1,11 +1,6 @@
 # KAR-Net: Knowledge-Adaptive Reasoning Network for Auditable Neuro-Symbolic Tabular Learning
 
-Official implementation of **KAR-Net**, accompanying the manuscript:
-
-> **KAR-Net: Knowledge-Adaptive Reasoning Network for Auditable Neuro-Symbolic Tabular Learning**  
-> Angom Sonali Devi and Aheibam Dinamani Singh  
-> Department of Electronics and Communication Engineering, National Institute of Technology Manipur, Imphal, India  
-> *Submitted to Knowledge and Information Systems (Springer)*
+Official implementation of **KAR-Net**, a neuro-symbolic framework for auditable tabular learning.
 
 ## Overview
 
