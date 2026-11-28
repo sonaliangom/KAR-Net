@@ -29,7 +29,7 @@ MODEL_PALETTE = {
 
 DEFAULT_COLOR = "#7f8c8d"
 
-# Decision-curve styling used for the submitted manuscript panels.
+
 DCA_PALETTE = {
     "RF": "#C0392B", "Robust-GBDT": "#B9770E",
     "CatBoost": "#6C3483", "TabM": "#E67E22",
@@ -99,7 +99,6 @@ def format_condition_human_readable(cond: str, compact: bool = False) -> str:
     """Convert one coded rule clause into clean clinical text for plotting."""
     cond = cond.strip()
 
-    # Categorical / binary indicator clauses: VAR in {1.0} or {0.0}
     m_cat = re.match(r"^([A-Za-z0-9_]+)\s+in\s+\{([^}]*)\}$", cond)
     if m_cat:
         var, raw_vals = m_cat.group(1), m_cat.group(2)
@@ -117,7 +116,7 @@ def format_condition_human_readable(cond: str, compact: bool = False) -> str:
                 return "no self-reported diabetes"
         return f"{var} in {{{raw_vals}}}"
 
-    # Continuous threshold clauses: VAR <= VAL or VAR > VAL
+    
     m_num = re.match(r"^([A-Za-z0-9_]+)\s*(<=|>=|<|>)\s*([0-9.+\-eE]+)$", cond)
     if m_num:
         var, op, val = m_num.group(1), m_num.group(2), m_num.group(3)
@@ -146,7 +145,7 @@ def format_rule_human_readable(rule_str: str) -> str:
         first = first[0].upper() + first[1:] if first and first[0].islower() else first
         return f"{first}\nand {readable[1]}"
 
-    # Three or more clauses: comma-separated with line breaks roughly every 2 clauses
+   
     first = readable[0]
     readable[0] = first[0].upper() + first[1:] if first and first[0].islower() else first
     if len(readable) == 3:
@@ -178,7 +177,7 @@ def plot_case_study_figure(
     output_path: str,
     top_k: int = 4,
 ) -> None:
-    """Plot Figure 3 exactly as in the submitted manuscript (10x6 panel, fixed axes box)."""
+   
     df_sorted = rules_df.sort_values("Weight").copy()
     if len(df_sorted) > 2 * top_k:
         df_plot = pd.concat([df_sorted.head(top_k), df_sorted.tail(top_k)]).drop_duplicates().sort_values("Weight")
@@ -195,14 +194,14 @@ def plot_case_study_figure(
     colors = [_desaturate(cmap(float((w - w_min) / denom)), 0.25) for w in weights_arr]
 
     fig = plt.figure(figsize=(10, 6))
-    # Axes box measured from the submitted figure so bars keep identical positions.
+   
     ax = fig.add_axes([0.3889, 0.0898, 0.6010, 0.7847])
 
     y_pos = np.arange(len(df_plot))
     ax.barh(y_pos, weights_arr, color=colors, height=0.8, edgecolor="none")
     ax.set_yticks(y_pos)
     ax.set_yticklabels(df_plot["Label"].tolist(), fontsize=10)
-    # Seaborn-style categorical limits, so bar positions match the submitted panel.
+    
     ax.set_ylim(len(df_plot) - 0.5, -0.5)
     ax.set_title(
         f"Arbitration Mechanism: Illustrative Case (Fold {fold})\n"
@@ -213,7 +212,7 @@ def plot_case_study_figure(
     )
     ax.set_xlim(0.0, 1.1)
     ax.axvline(0.5, color="grey", linestyle="--")
-    ax.set_xlabel("Contextual reliability weight ($\\alpha$)\n All displayed rules are activated.")
+    ax.set_xlabel("Contextual reliability weight ($\\alpha$)")
     ax.set_ylabel("")
     fig.text(0.008, 0.5, "Rule", rotation=90, va="center", fontsize=10)
 
