@@ -213,7 +213,7 @@ def plot_case_study_figure(
     )
     ax.set_xlim(0.0, 1.1)
     ax.axvline(0.5, color="grey", linestyle="--")
-    ax.set_xlabel("Reliability Weight (Alpha) - Lower means Rule Suppressed")
+    ax.set_xlabel("Contextual reliability weight ($\\alpha$)\n All displayed rules are activated.")
     ax.set_ylabel("")
     fig.text(0.008, 0.5, "Rule", rotation=90, va="center", fontsize=10)
 
